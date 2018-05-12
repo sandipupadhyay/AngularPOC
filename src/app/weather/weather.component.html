@@ -1,0 +1,68 @@
+<div>
+
+	<div class="row">
+      <div class="col-md-12 col-lg-12 col-xl-12 mx-auto">
+          <div class="form-row mx-auto">
+            <div class="col-12 col-md-6 mb-2 mb-md-0">
+              <input type="text" class="form-control form-control-lg" [(ngModel)]='city' placeholder="Enter City...">
+            </div>
+            <div class="col-12 col-md-3">
+              <button type="submit" class="btn btn-block btn-lg btn-primary" (click)="getWeather()">Get Weather</button>
+					</div>
+						<!-- <div class="col-12 col-md-3">
+							<button type="submit" class="btn btn-block btn-lg btn-primary" (click)="forcast()">Forecast</button>
+						</div> -->
+          </div>
+      </div>
+    </div>
+<!-- Table displaying max, min & current temperatures in Fahrenheit along with the pressure, Humidity and Wind Speed -->
+	<div *ngIf="showWeather?.length != 0" style="margin-top: 25px;" class="col-md-12 col-lg-12 col-xl-12 mx-auto">
+		<table align="center" style="width:100%">
+			<thead>
+				<tr>
+					<th>City</th>
+					<th>Temp</th>
+					<th>Pressure</th>
+					<th>Temp Max</th>
+					<th>Temp Min</th>
+					<th>Humidity</th>
+					<th>Wind Speed</th>
+					<th>Clouds</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let x of showWeather">
+					<td>{{x.name}}</td>
+					<td>{{x.main.temp}}</td>
+					<td>{{x.main.pressure}}</td>
+					<td>{{x.main.temp_max}}</td>
+					<td>{{x.main.temp_min}}</td>
+					<td>{{x.main.humidity}}</td>
+					<td>{{x.wind.speed}}</td>
+					<td>{{x.clouds.all}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+<!-- Weather forcast for next 5 days showing only main temperature-->
+	<!-- <div *ngIf="showForcast.length != 0" style="margin-top: 25px;">
+		<table align="center">
+			<thead>
+				<tr>
+					<th>City</th>
+					<td *ngFor="let item of showForcast[0].list"><span>{{item.dt_txt.split(' ')[0]}}</span><br/><span>{{item.dt_txt.split(' ')[1]}}</span></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let x of showForcast">
+					<td>{{x.city.name}}</td>
+					<td *ngFor="let y of x.list">{{y.main.temp}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div> -->
+	<div *ngIf="errorCode">
+		{{errorCode}}
+	</div>
+</div>
